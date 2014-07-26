@@ -7,7 +7,7 @@ Currently the plugin uses CSS set in the default settings.
 
 Install
 -----
-Install by downloading the [0.1 release zip](https://github.com/bogdananton/Sublime-issueColorLabel/releases/download/0.1/issueColorLabel.zip) and unpacking it into the /plugins/ folder of your Redmine instance.
+Install by downloading the [0.1 release zip](https://github.com/bogdananton/Redmine-plugin-issueColorLabel/releases/download/0.1/issueColorLabel.zip) and unpacking it into the /plugins/ folder of your Redmine instance.
 
 
 Limitations
