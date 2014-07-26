@@ -1,3 +1,4 @@
 = issue_color_label
 
-Description goes here
+Simple plugin that sets different labels for Status, Tracker and Priority columns.
+Currently the plugin uses CSS set in the default settings.
