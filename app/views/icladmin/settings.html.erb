@@ -1,1 +1,64 @@
-<h2>Issue Colos Label Settings</h2>
+<h2>Issue Colors Label Settings</h2>
+
+<div id="icl_settings">
+	<% if (@isUserAdmin) %><form method="post" action="update_settings"><% end %>
+		<div class="row">
+			<h3>Enabled:</h3>
+			<label>
+				<input type="checkbox" value="1" <%= (@is_enabled ? 'checked="checked"' : '') %> name="enabled"> Yes
+			</label>
+		</div>
+
+		<div class="row">
+			<div class="span-4">
+				<h3>Trackers:</h3>
+				<% @tracker_list.each do |t| %>
+					<div class="item">
+						<label><%= t.read_attribute('name') %></label>
+						<% @key = "tracker-" << t['id'].to_s %>
+						<textarea name="css[<%= @key %>]"><%= (!@settingsDisplay[@key].nil?) ? @settingsDisplay[@key] : '' %></textarea>
+					</div>
+				<% end %>
+			</div>
+
+			<div class="span-4">
+				<h3>Priorities:</h3>
+				<% @priority_list.each do |t| %>
+					<div class="item">
+						<label><%= t.read_attribute('name') %></label>
+						<% @key = "priority-" << t['id'].to_s %>
+						<textarea name="css[<%= @key %>]"><%= (!@settingsDisplay[@key].nil?) ? @settingsDisplay[@key] : '' %></textarea>
+					</div>
+				<% end %>
+			</div>
+			
+			<div class="span-4">
+				<h3>Status:</h3>
+				<% @status_list.each do |t| %>
+					<div class="item">
+						<label><%= t.read_attribute('name') %></label>
+						<% @key = "status-" << t['id'].to_s %>
+						<textarea name="css[<%= @key %>]"><%= (!@settingsDisplay[@key].nil?) ? @settingsDisplay[@key] : '' %></textarea>
+					</div>
+				<% end %>
+			</div>
+
+			<div class="clear"></div>
+		</div>
+
+	<% if (@isUserAdmin) %>
+		<input name="authenticity_token" type="hidden" value="<%= form_authenticity_token %>">
+		<input type="submit" value="Save">
+		<input type="reset" value="Reset">
+	</form>
+	<% end %>
+</div>
+
+<style type="text/css">
+#icl_settings .row {padding:0 0 15px 0}
+#icl_settings .span-4 {width:33%; float:left;}
+#icl_settings .clear {clear:both}
+#icl_settings .item {padding:0 0 5px 0}
+#icl_settings .item label {padding:5px 0; display: block; font-weight: bold}
+#icl_settings .item textarea {width:95%;}
+</style>
