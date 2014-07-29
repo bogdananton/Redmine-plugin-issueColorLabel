@@ -1,0 +1,1 @@
+get '/issue-color-label/settings', :to => 'icladmin#settings'

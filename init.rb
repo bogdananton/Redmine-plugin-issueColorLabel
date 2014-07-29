@@ -1,4 +1,5 @@
 require 'redmine'
+require 'issuecolor_admin_helper_patch'
 require_dependency 'css_inserter_hooks'
 
 Redmine::Plugin.register :issue_color_label do
@@ -26,6 +27,8 @@ Redmine::Plugin.register :issue_color_label do
 #    - priority 5 is "Immediate"
 
   settings :default => {
+    'admin.label' => 'Issue Color Label',
+
     'tracker.1' => '
 	    background-repeat: no-repeat;
 		background-image: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAB5UlEQVR42q2TS0gbYRSFL/gIKJrGzJAwEzSNr4VFTcUoRJ1Km1J8xhgXolEiIqWlUEUFXehCgyKlRRSyKH1hacCdi9ad4E58gPhYCaULNypFQUQp4rXnV4OS6MofDnM457uXn2GG6L6O2Wz2KoryCj448tbqr9A6iwrsA1DrC60TGTowYKMtyJEkaevTeF9wJjR2Ntj/ml0ulxA8MnSyLG+BjXqLl56y0PL8V15bCLHXU81Op1PI464UGTowUYcP/WY5WJl1YLPZ+C6BAXtj2Gg0Lo6VqXOHfU95sL6CtZxslvTJrNPphOCRoQMDFjPXd6QUpSsn32szmHsdzENuPh7x8Y+ORp7+r3+jPpGhAwMWMzduoWWpZ5st6Xz6JlNo8rmVVVUVmqp6GM7BgI14B9vNppOjDpWPL7XrV/hdocQfHBL/bVPCORiwEQtW3fHre80JvFT3gDe8ybzvS+QdV5wQPDJ0YMBGLJh9QsPvixPC1+4u0PPvUhKCv8rB/NIoELHgs53kifzYg7xUkwAfp5l4zUFC8MjQgQEb9VtoV6jnyyPiKXscr5QQL+ReCB4ZOjC3/g8Gg+FneRIFRtPoz7ds4o/WC8EjK9dTAMytCywWSxOeDUQx3UZ6VpNIXRA8suvMvZ1z0tYUzprfin4AAAAASUVORK5CYII=");
@@ -64,4 +67,5 @@ Redmine::Plugin.register :issue_color_label do
     # @todo Make values dynamic by using a table and a config panel
   }
 
+  menu :admin_menu, :issue_color_label, 'issue-color-label/settings', :caption => 'Issue Color Label', :html_options => [:class => 'info'], :last => true
 end

@@ -4,6 +4,8 @@ class CssInserterHooks < Redmine::Hook::ViewListener
 
     $css_block = '<style type="text/css">' << "\n"
 
+    $css_block == $css_block << "#admin-menu .issue-color-label {background-image: url(images/changeset.png)} \n";
+
     $scopes = ['tracker', 'status', 'priority'];
     $scopes.each do |scope|
         $i  = 1
