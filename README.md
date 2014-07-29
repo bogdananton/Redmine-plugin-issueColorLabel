@@ -1,18 +1,22 @@
 Issue Color Label - Redmine plugin
 ==============
 
-Simple plugin that sets different labels for Status, Tracker and Priority columns.
-Currently the plugin uses CSS set in the default settings.
+Customize the Issues table display for Status, Tracker and Priority columns. 
+
+Uses a JSON file as a database. Settings can be updated from the /admin page, accessing the "Issue Color Label" item. 
+The plugin can be enabled / disabled from the same panel.
+
+Only administrators can update the settings, other users can only view the current settings.
 
 
 Install
 -----
-Install by downloading the [0.1 release zip](https://github.com/bogdananton/Redmine-plugin-issueColorLabel/releases/download/0.1/issueColorLabel.zip) and unpacking it into the /plugins/ folder of your Redmine instance.
+Install by downloading the [0.2 release zip](https://github.com/bogdananton/Redmine-plugin-issueColorLabel/releases/download/0.2/issueColorLabel.zip) and unpacking it into the /plugins/ folder of your Redmine instance.
 
 
 Limitations
 -----
-Currently the CSS must be set per item (tracker, status, priority) using keys in the range [1, 10], in the init.rb settings array.
+The settings can only be updated by an administrator and are plain CSS.
 
 
 Preview
