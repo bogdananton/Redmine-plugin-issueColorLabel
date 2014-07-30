@@ -19,5 +19,5 @@ Redmine::Plugin.register :issue_color_label do
     'admin_label' => 'Issue Color Label'
   }
 
-  menu :admin_menu, :issue_color_label, 'issue-color-label/settings', :caption => :default['admin_label'], :last => true
+  menu :admin_menu, :issue_color_label, '/issue-color-label/settings', :caption => :default['admin_label'], :last => true
 end
