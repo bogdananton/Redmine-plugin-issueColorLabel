@@ -13,11 +13,15 @@ Install
 Install by downloading the [0.2 release zip](https://github.com/bogdananton/Redmine-plugin-issueColorLabel/releases/download/0.2/issueColorLabel.zip) and unpacking it into the /plugins/ folder of your Redmine instance.
 
 
-Limitations
+Limitations / future development
 -----
-The settings can only be updated by an administrator. Uses plain CSS.
+The settings can only be updated by an administrator. Uses plain CSS.<br/>
+Working on improving the way options are set, migrating information to DB instead of using a .json file and working with custom fields and values.
 
 
 Preview
 -----
 ![](https://raw.githubusercontent.com/bogdananton/Redmine-plugin-issueColorLabel/master/preview.png)
+
+Admin<br/>
+![](https://raw.githubusercontent.com/bogdananton/Redmine-plugin-issueColorLabel/master/admin.png)
