@@ -1,1 +1,3 @@
-- (^|/)colpick\.(js|css)$
+- assets/stylesheets/colpick.css
+- assets/javascripts/colpick.js
+
