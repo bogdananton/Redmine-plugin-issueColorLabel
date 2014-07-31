@@ -1,7 +1,10 @@
 <h2>Issue Colors Label Settings</h2>
 
-<%= javascript_include_tag 'colpick.js', :plugin => 'issue_color_label' %>
-<%= stylesheet_link_tag 'colpick.css', :plugin => 'issue_color_label' %>
+<%= javascript_include_tag '../vendor/colpick.js', :plugin => 'issue_color_label' %>
+<%= stylesheet_link_tag '../vendor/colpick.css', :plugin => 'issue_color_label' %>
+
+<%= stylesheet_link_tag 'settings.css', :plugin => 'issue_color_label' %>
+<%= javascript_include_tag 'settings.js', :plugin => 'issue_color_label' %>
 
 <div id="icl_settings">
 	<% if (@isUserAdmin) %><form method="post" action="update_settings"><% end %>
@@ -12,51 +15,12 @@
 			</label>
 		</div>
 
-		<!--
-		<textarea name="css[<%= @key %>]"><%= (!@settingsDisplay[@key].nil?) ? @settingsDisplay[@key] : '' %></textarea>
-		-->
-
+		<% @dataset = {'tracker' => @tracker_list, 'priority' => @priority_list, 'status' => @status_list} %>
 		<div class="row">
-			<div class="span-4">
-				<h3>Trackers:</h3>
-				<table width="95%" border="0" cellpadding="0" cellspacing="0">
-					<tr class="header">
-						<td></td>
-						<td>Color</td>
-						<td>Background color</td>
-						<td>Background image</td>
-						<td></td>
-					</tr>
-					<% @tracker_list.each do |t| %>
-						<% @key = "tracker-" << t['id'].to_s %>
-						<tr class="item">
-							<td class="target_<%= @key %> text"><%= t.read_attribute('name') %></td>
-							<td>
-								<% @option_code = "color" %>
-								<div class="picker" id="<%= @option_code_ %>_<%= @key %>"></div>
-								<input id="select<%= @option_code_ %><%= @key %>" type="hidden" name="css[<%= @key %>][<%= @option_code %>]" 
-									value="<%= (!@settingsDisplay[@key][@option_code].nil?) ? @settingsDisplay[@key][@option_code] : '' %>">
-							</td>
-							<td>
-								<% @option_code = "background-color" %>
-								<div class="picker" id="<%= @option_code_ %>_<%= @key %>"></div>
-								<input id="select<%= @option_code_ %><%= @key %>" type="hidden" name="css[<%= @key %>][<%= @option_code %>]" 
-									value="<%= (!@settingsDisplay[@key][@option_code].nil?) ? @settingsDisplay[@key][@option_code] : '' %>">
-							</td>
-							<td>
-								<% @option_code = "background-image" %>
-								<div class="<%= @option_code %>" id="<%= @option_code_ %><%= @key %>">edit</div>
-								<input id="select<%= @option_code_ %><%= @key %>" type="hidden" name="css[<%= @key %>][<%= @option_code %>]" 
-									value="<%= (!@settingsDisplay[@key][@option_code].nil?) ? @settingsDisplay[@key][@option_code] : '' %>">
-							</td>
-							<td><button class="reset" id="reset_<%= @key %>">Reset</button></td>
-						</tr>
-					<% end %>
-				</table>
-			</div>
+			<% @dataset.each_pair do |groupCode, groupValues| %>
 
 			<div class="span-4">
-				<h3>Priorities:</h3>
+				<h3><%= groupCode %>:</h3>
 				<table width="95%" border="0" cellpadding="0" cellspacing="0">
 					<tr class="header">
 						<td></td>
@@ -65,71 +29,35 @@
 						<td>Background image</td>
 						<td></td>
 					</tr>
-					<% @priority_list.each do |t| %>
-						<% @key = "priority-" << t['id'].to_s %>
+					<% groupValues.each do |t| %>
+						<% @key = groupCode + "-" + t['id'].to_s %>
 						<tr class="item">
-							<td class="target_<%= @key %> text"><%= t.read_attribute('name') %></td>
+							<td id="target_<%= @key %>" class="text"><%= t.read_attribute('name') %></td>
 							<td>
 								<% @option_code = "color" %>
-								<div class="picker" id="<%= @option_code_ %>_<%= @key %>"></div>
-								<input id="select<%= @option_code_ %><%= @key %>" type="hidden" name="css[<%= @key %>][<%= @option_code %>]" 
-									value="<%= (!@settingsDisplay[@key][@option_code].nil?) ? @settingsDisplay[@key][@option_code] : '' %>">
+								<div class="picker" id="<%= @option_code %>_<%= @key %>"></div>
+								<input id="select_<%= @option_code %>_<%= @key %>" type="hidden" name="css[<%= @key %>][<%= @option_code %>]" 
+									class="selectors" value="<%= (!@settingsDisplay[@key][@option_code].nil?) ? @settingsDisplay[@key][@option_code] : '' %>">
 							</td>
 							<td>
 								<% @option_code = "background-color" %>
-								<div class="picker" id="<%= @option_code_ %>_<%= @key %>"></div>
-								<input id="select<%= @option_code_ %><%= @key %>" type="hidden" name="css[<%= @key %>][<%= @option_code %>]" 
-									value="<%= (!@settingsDisplay[@key][@option_code].nil?) ? @settingsDisplay[@key][@option_code] : '' %>">
+								<div class="picker" id="<%= @option_code %>_<%= @key %>"></div>
+								<input id="select_<%= @option_code %>_<%= @key %>" type="hidden" name="css[<%= @key %>][<%= @option_code %>]" 
+									class="selectors" value="<%= (!@settingsDisplay[@key][@option_code].nil?) ? @settingsDisplay[@key][@option_code] : '' %>">
 							</td>
 							<td>
 								<% @option_code = "background-image" %>
-								<div class="<%= @option_code %>" id="<%= @option_code_ %><%= @key %>">edit</div>
-								<input id="select<%= @option_code_ %><%= @key %>" type="hidden" name="css[<%= @key %>][<%= @option_code %>]" 
-									value="<%= (!@settingsDisplay[@key][@option_code].nil?) ? @settingsDisplay[@key][@option_code] : '' %>">
+								<div class="<%= @option_code %>" id="<%= @option_code %><%= @key %>">edit</div>
+								<input id="select_<%= @option_code %>_<%= @key %>" type="hidden" name="css[<%= @key %>][<%= @option_code %>]" 
+									class="selectors" value="http://redmine.dev/images/add.png">
+									<!-- class="selectors" value="<%= (!@settingsDisplay[@key][@option_code].nil?) ? @settingsDisplay[@key][@option_code] : '' %>"> -->
 							</td>
-							<td><button class="reset" id="reset_<%= @key %>">Reset</button></td>
+							<td><input type="button" class="reset" id="reset_<%= @key %>" value="Reset" /></td>
 						</tr>
 					<% end %>
 				</table>
 			</div>
-			
-			<div class="span-4">
-				<h3>Status:</h3>
-				<table width="95%" border="0" cellpadding="0" cellspacing="0">
-					<tr class="header">
-						<td></td>
-						<td>Color</td>
-						<td>Background color</td>
-						<td>Background image</td>
-						<td></td>
-					</tr>
-					<% @status_list.each do |t| %>
-						<% @key = "status-" << t['id'].to_s %>
-						<tr class="item">
-							<td class="target_<%= @key %> text"><%= t.read_attribute('name') %></td>
-							<td>
-								<% @option_code = "color" %>
-								<div class="picker" id="<%= @option_code_ %>_<%= @key %>"></div>
-								<input id="select<%= @option_code_ %><%= @key %>" type="hidden" name="css[<%= @key %>][<%= @option_code %>]" 
-									value="<%= (!@settingsDisplay[@key][@option_code].nil?) ? @settingsDisplay[@key][@option_code] : '' %>">
-							</td>
-							<td>
-								<% @option_code = "background-color" %>
-								<div class="picker" id="<%= @option_code_ %>_<%= @key %>"></div>
-								<input id="select<%= @option_code_ %><%= @key %>" type="hidden" name="css[<%= @key %>][<%= @option_code %>]" 
-									value="<%= (!@settingsDisplay[@key][@option_code].nil?) ? @settingsDisplay[@key][@option_code] : '' %>">
-							</td>
-							<td>
-								<% @option_code = "background-image" %>
-								<div class="<%= @option_code %>" id="<%= @option_code_ %><%= @key %>">edit</div>
-								<input id="select<%= @option_code_ %><%= @key %>" type="hidden" name="css[<%= @key %>][<%= @option_code %>]" 
-									value="<%= (!@settingsDisplay[@key][@option_code].nil?) ? @settingsDisplay[@key][@option_code] : '' %>">
-							</td>
-							<td><button class="reset" id="reset_<%= @key %>">Reset</button></td>
-						</tr>
-					<% end %>
-				</table>
-			</div>
+			<% end %>
 
 			<div class="clear"></div>
 		</div>
@@ -141,31 +69,3 @@
 	</form>
 	<% end %>
 </div>
-
-
-	<!--
-	$('.color-box').colpick({
-		colorScheme:'dark',
-		layout:'rgbhex',
-		color:'ff8800',
-		onSubmit:function(hsb,hex,rgb,el) {
-			$(el).css('background-color', '#'+hex);
-			$(el).colpickHide();
-		}
-	})
-	.css('background-color', '#ff8800');
-	CSS
-
-	-->
-
-<style type="text/css">
-#icl_settings .picker {width:16px; height:16px; margin:3px 3px 0 3px; border:1px solid #ccc; cursor: pointer; display: inline-block}
-#icl_settings .row {padding:0 0 15px 0}
-#icl_settings .span-4 {padding-bottom:15px}
-#icl_settings .clear {clear:both}
-#icl_settings .row table {border:1px solid #ccc; border-bottom: none; border-right: none}
-#icl_settings .row table td {text-align: center; border-right:1px solid #ccc; width: 25%; border-bottom: 1px solid #ccc}
-#icl_settings .reset {cursor: pointer}
-
-.background-image {color:blue; text-decoration: underline; cursor: pointer}
-</style>

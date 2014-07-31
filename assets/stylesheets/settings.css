@@ -1,0 +1,9 @@
+
+#icl_settings .picker {width:16px; height:16px; margin:3px 3px 0 3px; border:1px solid #ccc; cursor: pointer; display: inline-block}
+#icl_settings .row {padding:0 0 15px 0}
+#icl_settings .span-4 {padding-bottom:15px}
+#icl_settings .clear {clear:both}
+#icl_settings .row table {border:1px solid #ccc; border-bottom: none; border-right: none}
+#icl_settings .row table td {text-align: center; border-right:1px solid #ccc; width: 25%; border-bottom: 1px solid #ccc}
+#icl_settings .reset {cursor: pointer}
+.background-image {color:blue; text-decoration: underline; cursor: pointer}
